@@ -110,7 +110,7 @@ describe("Test royalty functionality", function() {
         const shareholderPayout = (totalMoneyInContract.mul(shareholderShares)).div(totalSharesScaled)
 
         const shareholderBalBefore: BigNumber = await erc20Token.balanceOf(payees[i].address);
-        await proxyForRoyalty.connect(protocolProvider)["release(address,address)"](erc20Token.address, payees[i].address);
+        await proxyForRoyalty.connect(protocolProvider).releaseERC20(erc20Token.address, payees[i].address);
         const shareholderBalAfter: BigNumber = await erc20Token.balanceOf(payees[i].address);
 
         expect(shareholderBalAfter).to.equal(shareholderBalBefore.add(shareholderPayout));
@@ -121,16 +121,16 @@ describe("Test royalty functionality", function() {
       const non_shareholder = protocolProvider;
 
       await expect(
-        proxyForRoyalty.connect(non_shareholder)["release(address,address)"](erc20Token.address, non_shareholder.address)
+        proxyForRoyalty.connect(non_shareholder).releaseERC20(erc20Token.address, non_shareholder.address)
       ).to.be.revertedWith("aymentSplitter: account has no shares")
     });
 
     it("Should revert if a shareholder is not due any payement", async () => {
       const payee = payees[0];
       
-      await proxyForRoyalty.connect(payee)["release(address,address)"](erc20Token.address, payee.address);
+      await proxyForRoyalty.connect(payee).releaseERC20(erc20Token.address, payee.address);
       await expect(
-        proxyForRoyalty.connect(payee)["release(address,address)"](erc20Token.address, payee.address)
+        proxyForRoyalty.connect(payee).releaseERC20(erc20Token.address, payee.address)
       ).to.be.revertedWith("PaymentSplitter: account is not due payment")
     });
 
@@ -143,7 +143,7 @@ describe("Test royalty functionality", function() {
         const shareholderPayout = (totalMoneyInContract.mul(shareholderShares)).div(totalSharesScaled)
 
         await expect(
-          proxyForRoyalty.connect(protocolProvider)["release(address,address)"](erc20Token.address, payees[i].address)
+          proxyForRoyalty.connect(protocolProvider).releaseERC20(erc20Token.address, payees[i].address)
         ).to.emit(proxyForRoyalty, "ERC20PaymentReleased")
         .withArgs(
           ...Object.values({

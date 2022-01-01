@@ -153,7 +153,7 @@ contract PaymentSplitter is Context {
      * percentage of the total shares and their previous withdrawals. `token` must be the address of an IERC20
      * contract.
      */
-    function release(IERC20 token, address account) public virtual {
+    function releaseERC20(IERC20 token, address account) public virtual {
         require(_shares[account] > 0, "PaymentSplitter: account has no shares");
 
         uint256 totalReceived = token.balanceOf(address(this)) + totalReleased(token);
@@ -180,9 +180,9 @@ contract PaymentSplitter is Context {
     /**
      * @dev Release owed amount of the `token` to all of the payees.
      */
-    function distribute(IERC20 token) public virtual {
+    function distributeERC20(IERC20 token) public virtual {
         for (uint256 i = 0; i < _payees.length; i++) {
-            release(token, _payees[i]);
+            releaseERC20(token, _payees[i]);
         }
     }
 
