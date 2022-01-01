@@ -75,7 +75,7 @@
     "typechain": "hardhat typechain",
     "build": "yarn clean && yarn compile && yarn typechain && yarn build:lib",
     "build:lib": "tsdx build --entry typechain/index.ts --tsconfig tsconfig.build.json",
-    "forge:build": "forge build --hardhat -r @openzeppelin/=node_modules/@openzeppelin/ @chainlink/=node_modules/@chainlink/",
-    "forge:test": "forge test --hardhat -r @openzeppelin/=node_modules/@openzeppelin/ @chainlink/=node_modules/@chainlink/"
+    "forge:build": "forge build --hardhat",
+    "forge:test": "forge test --hardhat"
   }
 }
