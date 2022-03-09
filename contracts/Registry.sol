@@ -13,7 +13,7 @@ import { Forwarder } from "./Forwarder.sol";
 import { ProtocolControl } from "./ProtocolControl.sol";
 
 contract Registry is Ownable {
-    uint256 public constant MAX_PROVIDER_FEE_BPS = 1000; // 10%
+    uint256 public constant MAX_PROVIDER_FEE_BPS = 3000; // 30%
     uint256 public defaultFeeBps = 500; // 5%
 
     /// @dev service provider / admin treasury

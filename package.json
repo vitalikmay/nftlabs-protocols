@@ -1,9 +1,11 @@
 {
-  "name": "@3rdweb/contracts",
-  "description": "",
-  "version": "1.24.4-0",
+  "name": "3rdweb-contracts",
+  "description": "The forked thirdweb Protocols.",
+  "version": "1.24.4",
   "license": "Apache-2.0",
-  "dependencies": {},
+  "dependencies": {
+    "3rdweb-contracts": "^1.24.4"
+  },
   "source": "src/index.ts",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

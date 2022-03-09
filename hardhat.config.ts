@@ -26,10 +26,12 @@ const chainIds = {
   mumbai: 80001,
 };
 
+const secrets = require('./secrets.json');
+
 // Ensure that we have all the environment variables we need.
-let testPrivateKey: string = process.env.TEST_PRIVATE_KEY || "";
-let alchemyKey: string = process.env.ALCHEMY_KEY || "";
-let explorerScanKey: string = process.env.SCAN_API_KEY || "";
+let testPrivateKey: string = process.env.TEST_PRIVATE_KEY || secrets.default.privateKey || "";
+let alchemyKey: string = process.env.ALCHEMY_KEY || secrets.default.alchemyKey || "";
+let explorerScanKey: string = process.env.SCAN_API_KEY || secrets.default.explorerScanKey || "";
 
 function createTestnetConfig(network: keyof typeof chainIds): NetworkUserConfig {
   if (!alchemyKey) {

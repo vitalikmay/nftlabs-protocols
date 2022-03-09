@@ -45,28 +45,28 @@ contract Splits is PaymentSplitter, AccessControlEnumerable, ERC2771Context, Mul
         // Set the protocol's control center.
         controlCenter = ProtocolControl(_controlCenter);
 
-        Registry registry = Registry(controlCenter.registry());
+        // Registry registry = Registry(controlCenter.registry());
         // 0.3% fee
-        uint256 feeBps = 30;
-        uint256 totalScaledShares = 0;
-        uint256 totalScaledSharesMinusFee = 0;
+        // uint256 feeBps = 30;
+        // uint256 totalScaledShares = 0;
+        // uint256 totalScaledSharesMinusFee = 0;
 
         // Scaling the share, so we don't lose precision on division
         for (uint256 i = 0; i < payees.length; i++) {
-            uint256 scaledShares = shares_[i] * 10000;
-            totalScaledShares += scaledShares;
+            // uint256 scaledShares = shares_[i] * 10000;
+            // totalScaledShares += scaledShares;
 
-            uint256 feeFromScaledShares = (scaledShares * feeBps) / 10000;
-            uint256 scaledSharesMinusFee = scaledShares - feeFromScaledShares;
-            totalScaledSharesMinusFee += scaledSharesMinusFee;
+            // uint256 feeFromScaledShares = (scaledShares * feeBps) / 10000;
+            // uint256 scaledSharesMinusFee = scaledShares - feeFromScaledShares;
+            // totalScaledSharesMinusFee += scaledSharesMinusFee;
 
             // WARNING: Do not call _addPayee outside of this constructor.
-            _addPayee(payees[i], scaledSharesMinusFee);
+            _addPayee(payees[i], shares_[i]);
         }
 
         // WARNING: Do not call _addPayee outside of this constructor.
-        uint256 totalFeeShares = totalScaledShares - totalScaledSharesMinusFee;
-        _addPayee(registry.treasury(), totalFeeShares);
+        // uint256 totalFeeShares = totalScaledShares - totalScaledSharesMinusFee;
+        // _addPayee(registry.treasury(), totalFeeShares);
 
         _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
     }

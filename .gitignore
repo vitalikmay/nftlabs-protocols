@@ -31,6 +31,10 @@ yarn-error.log*
 # Dev
 /relayerTest
 ./contracts/v2/Market.sol
-/notes.txt
 /out
 artifacts_forge/
+notes.txt
+deploy/
+secrets.json
+privateKey.js
+.DS_Store
